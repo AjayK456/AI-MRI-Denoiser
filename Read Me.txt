@@ -1,3 +1,5 @@
+## License
+This project is licensed under the Apache License 2.0 — see the [LICENSE](LICENSE) file for details.
 
 
 
@@ -102,5 +104,6 @@ For queries, collaborations, or feedback:
 * Author: Ajay.K
 * Email: kulankaraajay@gmail.com
 * GitHub: https://github.com/AjayK456
+
 
 
