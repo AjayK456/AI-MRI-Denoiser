@@ -51,7 +51,11 @@ st.markdown("Upload a **.pt, .png, or .jpg MRI image (64x64 recommended)**")
 
 st.info("⚠️ For best results, use grayscale MRI images. Non-medical images may give poor results.")
 
-uploaded_file = st.file_uploader("Upload Image", type=["pt", "png", "jpg", "jpeg"])
+uploaded_file = st.file_uploader(
+    "Upload Image",
+    type=["pt", "png", "jpg", "jpeg"],
+    key="file_uploader_main"
+)
 
 # -------------------------------
 # PREPROCESS FUNCTION
