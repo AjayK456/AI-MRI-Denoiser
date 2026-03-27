@@ -1,37 +1,19 @@
 import streamlit as st
 import torch
-import torch.nn as nn
 import matplotlib.pyplot as plt
+import os
 
 # -------------------------------
-# EXACT MODEL ARCHITECTURE
+# DEBUG (optional – remove later)
 # -------------------------------
-class DenoisingAutoencoder(nn.Module):
-    def __init__(self):
-        super(DenoisingAutoencoder, self).__init__()
-        self.encoder = nn.Sequential(
-            nn.Conv2d(1, 16, 3, padding=1),
-            nn.ReLU(),
-            nn.Conv2d(16, 8, 3, padding=1),
-            nn.ReLU()
-        )
-        self.decoder = nn.Sequential(
-            nn.Conv2d(8, 16, 3, padding=1),
-            nn.ReLU(),
-            nn.Conv2d(16, 1, 3, padding=1)
-        )
-
-    def forward(self, x):
-        return self.decoder(self.encoder(x))
-
+st.write("Files in repo:", os.listdir())
 
 # -------------------------------
-# LOAD MODEL
+# LOAD FULL MODEL
 # -------------------------------
 @st.cache_resource
 def load_model():
-    model = DenoisingAutoencoder()
-    model.load_state_dict(torch.load("denoising_autoencoder.pth", map_location=torch.device('cpu')))
+    model = torch.load("denoising_full_model.pth", map_location=torch.device('cpu'))
     model.eval()
     return model
 
@@ -51,6 +33,7 @@ uploaded_file = st.file_uploader("Upload MRI file", type=["pt"])
 if uploaded_file is not None:
     noisy_img = torch.load(uploaded_file)
 
+    # Ensure correct shape
     if noisy_img.dim() == 2:
         noisy_img = noisy_img.unsqueeze(0).unsqueeze(0)
 
@@ -61,7 +44,7 @@ if uploaded_file is not None:
         denoised_img = output.squeeze().numpy()
 
     # -------------------------------
-    # DISPLAY
+    # VISUALIZATION
     # -------------------------------
     fig, axes = plt.subplots(1, 2, figsize=(10, 4))
 
@@ -76,7 +59,7 @@ if uploaded_file is not None:
     st.pyplot(fig)
 
     # -------------------------------
-    # DOWNLOAD
+    # DOWNLOAD OUTPUT
     # -------------------------------
     if st.button("Download Denoised Image"):
         torch.save(torch.tensor(denoised_img), "denoised_output.pt")
