@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import streamlit as st
 
 # MUST be first Streamlit command
@@ -127,7 +127,7 @@ if uploaded_file is not None:
                 "Click to Download",
                 f,
                 file_name="denoised_output.png"
-=======
+
 import streamlit as st
 
 # MUST be first Streamlit command
@@ -256,5 +256,5 @@ if uploaded_file is not None:
                 "Click to Download",
                 f,
                 file_name="denoised_output.png"
->>>>>>> 63cf7bdedf3673c955e44cab92ab67da7c274854
+
             )
