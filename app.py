@@ -127,6 +127,7 @@ if uploaded_file is not None:
                 "Click to Download",
                 f,
                 file_name="denoised_output.png"
+            )
 
 import streamlit as st
 
